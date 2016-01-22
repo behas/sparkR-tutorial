@@ -91,8 +91,8 @@ g <- ggplot(tx_frequency, aes(date, count)) +
   stat_smooth() +
   ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
 g
-
+ggsave(g, file="no_transactions_spark.pdf")
 
 end.time <- Sys.time()
 time.taken <- end.time - start.time
-cat("Overall execution time:", time.taken)
+cat("Overall execution time:", toString(time.taken))

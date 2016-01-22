@@ -66,7 +66,7 @@ g <- ggplot(tx_frequency, aes(date, n)) +
      stat_smooth() +
      ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
 g
-ggsave(g, file="results/no_transactions.pdf")
+ggsave(g, file="no_transactions.pdf")
 
 end.time <- Sys.time()
 time.taken <- end.time - start.time
