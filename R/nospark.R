@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# Compute statistics as shown on blockchain.info/stats
+# Compute Bitcoin transaction statistics using (standard) R packages
 
 # Run as follows:
 #   ./R/blockchain_stats [dump_directory]
@@ -30,15 +30,13 @@ library("dplyr")
 library("ggplot2")
 library("scales")
 
-############# DATA WRANGLING AND PLOTTING #############
-
-#### Number of Transactions per Day #####
+############# DATA WRANGLING #############
 
 cat("Loading blocks dataset\n")
 blocks <- read.csv(BLOCKS_FILE, head=FALSE)
 colnames(blocks) <- c("block_hash", "height", "timestamp")
 
-cat("Adding UTC date column to block data frame\n")
+cat("Adding date column computed from timestamp column\n")
 blocks$date <- as.Date(format(as.POSIXct(blocks$timestamp, origin="1970-01-01", tz="UTC"), "%Y-%m-%d"))
 
 cat("Loading transaction dataset\n")
@@ -58,11 +56,7 @@ txs_w_date <- left_join(txs_w_block_hash, blocks, by = "block_hash")
 cat("Grouping transactions by date\n")
 tx_frequency <- dplyr::count(txs_w_date, date)
 
-cat("Writing results\n")
-
-dir.create("results", showWarnings = FALSE)
-
-write.csv(tx_frequency, file="results/no_transactions.csv")
+############# PLOTTING #############
 
 cat("Plotting transaction frequency\n")
 g <- ggplot(tx_frequency, aes(date, n)) +
