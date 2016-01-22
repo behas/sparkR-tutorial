@@ -7,6 +7,8 @@
 
 ############# INIT #############
 
+start.time <- Sys.time()
+
 # Setting defaults
 
 DEFAULT_DUMP_DIR <- c("~/Desktop/bitcoingraph-0.1")
@@ -65,3 +67,7 @@ g <- ggplot(tx_frequency, aes(date, n)) +
      ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
 g
 ggsave(g, file="results/no_transactions.pdf")
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+cat("Overall execution time:", time.taken)

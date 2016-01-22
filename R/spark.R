@@ -5,6 +5,8 @@
 # Run as follows:
 #   ./R/spark [dump_directory]
 
+start.time <- Sys.time()
+
 ############# INIT #############
 
 # Setting defaults
@@ -89,3 +91,8 @@ g <- ggplot(tx_frequency, aes(date, count)) +
   stat_smooth() +
   ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
 g
+
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+cat("Overall execution time:", time.taken)
