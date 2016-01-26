@@ -71,3 +71,4 @@ ggsave(g, file="no_transactions.pdf")
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 cat("Overall execution time:", time.taken)
+
