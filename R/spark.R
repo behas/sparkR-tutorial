@@ -11,7 +11,7 @@ start.time <- Sys.time()
 
 # Setting defaults
 
-DEFAULT_DUMP_DIR <- c("/Users/haslhoferb/Desktop/bitcoingraph-0.1")
+DEFAULT_DUMP_DIR <- c("~/Desktop/sparkR-tutorial-dataset/small")
 setwd(".")
 
 # Reading command line arguments
@@ -76,7 +76,6 @@ txs_w_date <- join(txs_w_block_hash, blocks, txs_w_block_hash$block_hash == bloc
 
 cat("Grouping transactions by date\n")
 tx_frequency <- summarize(groupBy(txs_w_date, txs_w_date$date), count = n(txs_w_date$date))
-
 tx_frequency <- collect(arrange(tx_frequency, asc(tx_frequency$date)))
 tx_frequency$date <- as.Date(tx_frequency$date)
 
@@ -90,8 +89,7 @@ g <- ggplot(tx_frequency, aes(date, count)) +
   geom_line(colour = "grey") + scale_x_date() +
   stat_smooth() +
   ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
-g
-ggsave(g, file="no_transactions_spark.pdf")
+ggsave(g, file="transactions_spark.pdf")
 
 end.time <- Sys.time()
 time.taken <- end.time - start.time

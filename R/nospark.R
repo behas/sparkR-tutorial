@@ -3,7 +3,7 @@
 # Compute Bitcoin transaction statistics using (standard) R packages
 
 # Run as follows:
-#   ./R/blockchain_stats [dump_directory]
+#   ./R/nospark.R [dump_directory]/small
 
 ############# INIT #############
 
@@ -11,7 +11,7 @@ start.time <- Sys.time()
 
 # Setting defaults
 
-DEFAULT_DUMP_DIR <- c("~/Desktop/bitcoingraph-0.1")
+DEFAULT_DUMP_DIR <- c("~/Desktop/sparkR-tutorial-dataset/small")
 setwd(".")
 
 # Reading command line arguments
@@ -39,7 +39,8 @@ blocks <- read.csv(BLOCKS_FILE, head=FALSE)
 colnames(blocks) <- c("block_hash", "height", "timestamp")
 
 cat("Adding date column computed from timestamp column\n")
-blocks$date <- as.Date(format(as.POSIXct(blocks$timestamp, origin="1970-01-01", tz="UTC"), "%Y-%m-%d"))
+blocks$date <- as.POSIXct(blocks$timestamp, origin=as.POSIXct("1970-01-01", tz="UTC"), tz="UTC")
+blocks$date <- as.Date(blocks$date)
 
 cat("Loading transaction dataset\n")
 txs <- read.csv(TX_FILE, head=FALSE)
@@ -57,6 +58,7 @@ txs_w_date <- left_join(txs_w_block_hash, blocks, by = "block_hash")
 
 cat("Grouping transactions by date\n")
 tx_frequency <- dplyr::count(txs_w_date, date)
+tx_frequency$date <- as.Date(tx_frequency$date)
 
 ############# PLOTTING #############
 
@@ -65,8 +67,7 @@ g <- ggplot(tx_frequency, aes(date, n)) +
      geom_line(colour = "grey") + scale_x_date() +
      stat_smooth() +
      ylab("Number of transactions") + xlab("") + scale_y_continuous(labels=comma)
-g
-ggsave(g, file="no_transactions.pdf")
+ggsave(g, file="transactions.pdf")
 
 end.time <- Sys.time()
 time.taken <- end.time - start.time
