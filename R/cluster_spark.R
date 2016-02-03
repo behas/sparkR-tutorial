@@ -3,7 +3,7 @@
 # Compute Bitcoin transaction statistics using Apache Spark
 
 # Run as follows:
-#   ./R/spark [dump_directory]
+# on a cluster use ./bin/sparkR --master spark://...:7077 --packages com.databricks:spark-csv_2.10:1.3.0
 
 start.time <- Sys.time()
 
@@ -11,7 +11,7 @@ start.time <- Sys.time()
 
 # Setting defaults
 
-DEFAULT_DUMP_DIR <- c("/net/mri.meduniwien.ac.at/scratch/physics/nobackup/parcomp/ait/bitcoingraph-0.3")
+DEFAULT_DUMP_DIR <- c("<PATH-TO-DATA>/bitcoingraph-0.3")
 setwd(".")
 
 # Reading command line arguments
@@ -26,10 +26,6 @@ if (is.na(DUMP_DIR)) DUMP_DIR <- DEFAULT_DUMP_DIR
 BLOCKS_FILE <- paste(DUMP_DIR, "/blocks.csv", sep="")
 TX_FILE <- paste(DUMP_DIR, "/transactions.csv", sep="")
 REL_BLOCKS_TX_FILE <- paste(DUMP_DIR, "/rel_block_tx.csv", sep="")
-
-############# SETUP APACHE SPARK #############
-
-# on a cluster use ./bin/sparkR --master spark://...:7077 --packages com.databricks:spark-csv_2.10:1.3.0
 
 ############# INIT AND LOAD DATA #############
 

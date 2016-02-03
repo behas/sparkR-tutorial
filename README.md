@@ -33,8 +33,18 @@ Clone this Git repository:
     git clone https://github.com/behas/sparkR-tutorial.git
     cd sparkR-tutorial
     
-    *** TODO Roland describe cluster setup ***
-    
+Spark cluster setup:
+
+For this tutorial we have used Spark in [Standalone Mode](http://spark.apache.org/docs/latest/spark-standalone.html). More information on Spark's integration in different cluster managers can be found [here](http://spark.apache.org/docs/latest/cluster-overview.html).
+
+Once Apache Spark is available on all cluster nodes and configured via the config files in the "conf" directory in the Spark installation directory, one can start the cluster by
+
+    ./sbin/start-all.sh 
+
+A Scala Spark-shell connecting to the master can be started using the following command:
+
+    ./bin/spark-shell --master spark://IP:PORT
+
 ## Dataset description
 
 The tutorial dataset provides Bitcoint block and transaction data in two different sizes:
@@ -58,10 +68,14 @@ The second R script uses Apache Spark's [SparkR library](https://spark.apache.or
 
 ## Spark R with large dataset in cluster mode (spark_cluster.R)
 
-    *** TODO Roland ***
+When starting R directly from the Spark directory connecting to a cluster, the address and port has to be supplied:
+
+     ./bin/sparkR --master spark://IP:PORT --packages com.databricks:spark-csv_2.10:1.3.0
+
+don't forget to include the spark-csv package depending on your Scala version (2.10 or 2.11) to be able to read CSV files in the example.
 
 ## Conributors
 
 * [Bernhard Haslhofer](http://bernhardhaslhofer.info)
-* [Roland Boubela](http://cluster.meduniwien.ac.at/index.php?id=4033&pers_id=472)
+* [Roland Boubela](http://www.zmpbmt.meduniwien.ac.at/forschung/division-mr-physics/high-performance-statistical-computing/)
     
