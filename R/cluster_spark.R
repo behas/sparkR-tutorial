@@ -11,7 +11,7 @@ start.time <- Sys.time()
 
 # Setting defaults
 
-DEFAULT_DUMP_DIR <- c("<PATH-TO-DATA>/bitcoingraph-0.3")
+DEFAULT_DUMP_DIR <- c("<PATH-TO-DATA>")
 setwd(".")
 
 # Reading command line arguments
