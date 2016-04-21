@@ -11,7 +11,7 @@ start.time <- Sys.time()
 
 # Setting defaults
 
-DEFAULT_DUMP_DIR <- c("~/Desktop/sparkR-tutorial-dataset/small")
+DEFAULT_DUMP_DIR <- c("<PATH-TO-DATA>")
 setwd(".")
 
 # Reading command line arguments
@@ -30,7 +30,7 @@ REL_BLOCKS_TX_FILE <- paste(DUMP_DIR, "/rel_block_tx.csv", sep="")
 ############# SETUP APACHE SPARK #############
 
 if (nchar(Sys.getenv("SPARK_HOME")) < 1) {
-  Sys.setenv(SPARK_HOME = "/Users/haslhoferb/projects/graphsense/spark-1.6.0-bin-hadoop2.6")
+  Sys.setenv(SPARK_HOME = "<PATH-TO-SPARK>")
 }
 library(SparkR, lib.loc = c(file.path(Sys.getenv("SPARK_HOME"), "R", "lib")))
 

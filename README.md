@@ -33,7 +33,13 @@ Clone this Git repository:
     git clone https://github.com/behas/sparkR-tutorial.git
     cd sparkR-tutorial
     
-Spark cluster setup:
+
+Replace `<PATH-TO-DATA>` in all R scripts with tutorial dataset path 
+
+Replace `<PATH-TO-SPARK>` in `R/spark.R` with Apache spark installation path
+
+
+### Spark cluster setup
 
 For this tutorial we have used Spark in [Standalone Mode](http://spark.apache.org/docs/latest/spark-standalone.html). More information on Spark's integration in different cluster managers can be found [here](http://spark.apache.org/docs/latest/cluster-overview.html).
 
@@ -49,7 +55,7 @@ A Scala Spark-shell connecting to the master can be started using the following 
 
 The tutorial dataset provides Bitcoint block and transaction data in two different sizes:
 
-* small: 2009-01 until 2012-05 (~ 640 GB)
+* small: 2009-01 until 2012-05 (~ 640 MB)
 * large: 2009-01 until 2015-11 (~ 17 GB)
 
 ## Standard R mode with small dataset (nospark.R)
